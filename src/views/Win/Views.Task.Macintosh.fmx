@@ -1,11 +1,11 @@
 inherited TaskView_Macintosh: TTaskView_Macintosh
   DesignerMasterStyle = 0
   inherited ListBox1: TListBox
-    Viewport.Width = 735.000000000000000000
-    Viewport.Height = 378.000000000000000000
+    Viewport.Width = 731.000000000000000000
+    Viewport.Height = 374.000000000000000000
     inherited lbiDetails: TListBoxItem
       inherited MemoDetails: TMemo
-        Viewport.Width = 619.000000000000000000
+        Viewport.Width = 615.000000000000000000
         Viewport.Height = 219.000000000000000000
       end
     end
@@ -17,5 +17,13 @@ inherited TaskView_Macintosh: TTaskView_Macintosh
     inherited Button2: TButton
       Position.X = 664.000000000000000000
     end
+  end
+  inherited StyleBook1: TStyleBook [2]
+  end
+  inherited TaskBindSource: TPrototypeBindSource [3]
+  end
+  inherited ActionList1: TActionList [4]
+  end
+  inherited BindingsList1: TBindingsList [5]
   end
 end

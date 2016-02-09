@@ -1,25 +1,28 @@
 unit Model.TaskList;
 
 interface
+
 uses
   Generics.Collections, Model.Task;
 
 type
   TTaskList = class
   private
-    FTasks : TObjectList<TTask>;
+    FTasks: TObjectList<TTask>;
     function GetCount: Integer;
   public
     constructor Create;
     destructor Destroy; override;
-    procedure AddTask(Task : TTask);
-    function AddNewTask : TTask;
+    procedure AddTask(Task: TTask);
+    function AddNewTask: TTask;
     function GetEnumerable: TEnumerable<TTask>;
-    function Contains(Task : TTask) : boolean;
-    property Count : Integer read GetCount;
+    function Contains(Task: TTask): boolean;
+    property Count: Integer read GetCount;
+    procedure Clear;
   end;
 
 implementation
+
 uses
   Model.Exceptions;
 
@@ -27,7 +30,7 @@ uses
 
 function TTaskList.AddNewTask: TTask;
 var
-  LTask : TTask;
+  LTask: TTask;
 begin
   LTask := TTask.Create;
   AddTask(LTask);
@@ -43,6 +46,11 @@ begin
     raise DuplicateTaskException.Create('TaskList already contains this Task');
 
   FTasks.Add(Task);
+end;
+
+procedure TTaskList.Clear;
+begin
+  FTasks.Clear;
 end;
 
 function TTaskList.Contains(Task: TTask): boolean;

@@ -4,11 +4,13 @@ interface
 
 uses
   System.SysUtils, System.Types, System.UITypes, System.Rtti, System.Classes,
-  System.Variants, FMX.Types, FMX.Controls, FMX.Forms, FMX.Dialogs, ViewModel.Task,
+  System.Variants, FMX.Types, FMX.Controls, FMX.Forms, FMX.Dialogs,
+  ViewModel.Task,
   Data.Bind.GenData, Data.Bind.Components, Data.Bind.ObjectScope,
-  System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.EngExt,
-  Fmx.Bind.DBEngExt, FMX.Edit, FMX.ExtCtrls, System.Actions, FMX.ActnList,
-  FMX.ListBox, Model.Task, Generics.Collections, FMX.Layouts, FMX.Memo, FMX.StdCtrls,
+  System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.EngExt,
+  FMX.Bind.DBEngExt, FMX.Edit, FMX.ExtCtrls, System.Actions, FMX.ActnList,
+  FMX.ListBox, Model.Task, Generics.Collections, FMX.Layouts, FMX.Memo,
+  FMX.StdCtrls,
   FMX.CalendarEdit, FMX.ComboEdit, FMX.Controls.Presentation, FMX.DateTimeCtrls,
   FMX.ScrollBox;
 
@@ -33,8 +35,7 @@ type
     LinkControlToField4: TLinkControlToField;
     ToolBar1: TToolBar;
     Label1: TLabel;
-    ListBoxGroupHeader1: TListBoxGroupHeader;
-    ListBoxGroupFooter1: TListBoxGroupFooter;
+    StyleBook1: TStyleBook;
     procedure TaskBindSourceCreateAdapter(Sender: TObject;
       var ABindSourceAdapter: TBindSourceAdapter);
     procedure actSaveUpdate(Sender: TObject);
@@ -42,10 +43,12 @@ type
     procedure actCancelExecute(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormActivate(Sender: TObject);
   private
-    FViewModel : TTaskViewModel;
+    FViewModel: TTaskViewModel;
   public
-    constructor Create(AOwner: TComponent; AViewModel : TTaskViewModel); reintroduce;
+    constructor Create(AOwner: TComponent; AViewModel: TTaskViewModel);
+      reintroduce;
   end;
 
 implementation
@@ -78,6 +81,11 @@ begin
   inherited Create(AOwner);
 end;
 
+procedure TTaskView.FormActivate(Sender: TObject);
+begin
+  if EditTitle.CanFocus then
+    EditTitle.SetFocus;
+end;
 
 procedure TTaskView.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -93,8 +101,7 @@ procedure TTaskView.TaskBindSourceCreateAdapter(Sender: TObject;
   var ABindSourceAdapter: TBindSourceAdapter);
 begin
   ABindSourceAdapter := TObjectBindSourceAdapter<TTask>.Create(TaskBindSource,
-                                                               FViewModel.Task,
-                                                               False);
+    FViewModel.Task, False);
   ABindSourceAdapter.AutoPost := True;
 end;
 

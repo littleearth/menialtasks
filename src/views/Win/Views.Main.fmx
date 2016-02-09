@@ -4,6 +4,7 @@ object ViewMain: TViewMain
   Caption = 'Menial Tasks'
   ClientHeight = 591
   ClientWidth = 828
+  Position = ScreenCenter
   FormFactor.Width = 1680
   FormFactor.Height = 1050
   FormFactor.Devices = [Desktop]
@@ -11,7 +12,8 @@ object ViewMain: TViewMain
   DesignerMasterStyle = 0
   object Panel3: TPanel
     Align = Client
-    Size.Width = 579.000000000000000000
+    Margins.Left = 50.000000000000000000
+    Size.Width = 778.000000000000000000
     Size.Height = 591.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
@@ -21,24 +23,24 @@ object ViewMain: TViewMain
       Margins.Right = 24.000000000000000000
       Position.X = 24.000000000000000000
       Position.Y = 8.000000000000000000
-      Size.Width = 531.000000000000000000
+      Size.Width = 730.000000000000000000
       Size.Height = 44.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 14
       object Button1: TButton
         Align = Left
         Margins.Right = 8.000000000000000000
-        Position.X = 232.000000000000000000
         Size.Width = 80.000000000000000000
-        Size.Height = 40.000000000000000000
+        Size.Height = 44.000000000000000000
         Size.PlatformDefault = False
+        StyleLookup = 'detailstoolbutton'
         TabOrder = 0
         Text = 'Button1'
-        Visible = False
       end
       object NavigatorViewModelBindSource: TBindNavigator
         Align = Left
         Margins.Right = 8.000000000000000000
+        Position.X = 88.000000000000000000
         Size.Width = 224.000000000000000000
         Size.Height = 44.000000000000000000
         Size.PlatformDefault = False
@@ -51,10 +53,11 @@ object ViewMain: TViewMain
       object Button2: TButton
         Align = Left
         Margins.Right = 8.000000000000000000
-        Position.X = 232.000000000000000000
+        Position.X = 320.000000000000000000
         Size.Width = 80.000000000000000000
         Size.Height = 44.000000000000000000
         Size.PlatformDefault = False
+        StyleLookup = 'addtoolbutton'
         TabOrder = 2
         Text = 'New Task'
         OnClick = Button2Click
@@ -62,10 +65,11 @@ object ViewMain: TViewMain
       object Button3: TButton
         Align = Left
         Margins.Right = 8.000000000000000000
-        Position.X = 320.000000000000000000
+        Position.X = 408.000000000000000000
         Size.Width = 80.000000000000000000
         Size.Height = 44.000000000000000000
         Size.PlatformDefault = False
+        StyleLookup = 'composetoolbutton'
         TabOrder = 3
         Text = 'Edit Task'
         OnClick = Button3Click
@@ -85,7 +89,7 @@ object ViewMain: TViewMain
       Margins.Top = 16.000000000000000000
       Margins.Right = 24.000000000000000000
       Margins.Bottom = 24.000000000000000000
-      Size.Width = 531.000000000000000000
+      Size.Width = 730.000000000000000000
       Size.Height = 499.000000000000000000
       Size.PlatformDefault = False
       Stroke.Color = claWhite
@@ -96,7 +100,7 @@ object ViewMain: TViewMain
         Margins.Right = 40.000000000000000000
         Position.X = 16.000000000000000000
         Position.Y = 73.000000000000000000
-        Size.Width = 475.000000000000000000
+        Size.Width = 674.000000000000000000
         Size.Height = 25.000000000000000000
         Size.PlatformDefault = False
         Stroke.Color = claWhite
@@ -109,7 +113,7 @@ object ViewMain: TViewMain
         Margins.Bottom = 8.000000000000000000
         Position.X = 8.000000000000000000
         Position.Y = 8.000000000000000000
-        Size.Width = 515.000000000000000000
+        Size.Width = 714.000000000000000000
         Size.Height = 57.000000000000000000
         Size.PlatformDefault = False
         Text = 
@@ -143,7 +147,7 @@ object ViewMain: TViewMain
         Margins.Left = 8.000000000000000000
         Margins.Right = 8.000000000000000000
         Margins.Bottom = 8.000000000000000000
-        Size.Width = 515.000000000000000000
+        Size.Width = 714.000000000000000000
         Size.Height = 393.000000000000000000
         Size.PlatformDefault = False
         Text = 'Lorem ipsum dolor sit amet'
@@ -155,7 +159,7 @@ object ViewMain: TViewMain
       object Circle1: TCircle
         Anchors = [akTop, akRight]
         Fill.Color = claDimgray
-        Position.X = 473.000000000000000000
+        Position.X = 672.000000000000000000
         Position.Y = 24.000000000000000000
         Size.Width = 74.000000000000000000
         Size.Height = 74.000000000000000000
@@ -166,7 +170,7 @@ object ViewMain: TViewMain
           Size.Width = 50.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
-          Text = '1 Nov'
+          Text = '31 Oct'
           TextSettings.Font.Size = 18.000000000000000000
           TextSettings.Font.Style = [fsBold]
           TextSettings.FontColor = claWhite
@@ -185,7 +189,7 @@ object ViewMain: TViewMain
     object Rectangle1: TRectangle
       Align = Client
       Fill.Color = claWhite
-      Size.Width = 248.000000000000000000
+      Size.Width = 49.000000000000000000
       Size.Height = 591.000000000000000000
       Size.PlatformDefault = False
       Stroke.Kind = None
@@ -198,7 +202,7 @@ object ViewMain: TViewMain
         Margins.Bottom = 8.000000000000000000
         Position.X = 8.000000000000000000
         Position.Y = 8.000000000000000000
-        Size.Width = 232.000000000000000000
+        Size.Width = 33.000000000000000000
         Size.Height = 17.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'listboxheaderlabel'
@@ -208,13 +212,12 @@ object ViewMain: TViewMain
       object ListBox1: TListBox
         Align = Client
         Margins.Top = 8.000000000000000000
-        Size.Width = 248.000000000000000000
+        Size.Width = 49.000000000000000000
         Size.Height = 550.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'transparentlistboxstyle'
         TabOrder = 1
         DisableFocusEffect = True
-        ItemIndex = 0
         ItemHeight = 60.000000000000000000
         Items.Strings = (
           
@@ -1651,7 +1654,7 @@ object ViewMain: TViewMain
         DefaultItemStyles.GroupHeaderStyle = ''
         DefaultItemStyles.GroupFooterStyle = ''
         OnItemClick = ListBox1ItemClick
-        Viewport.Width = 232.000000000000000000
+        Viewport.Width = 33.000000000000000000
         Viewport.Height = 550.000000000000000000
       end
     end

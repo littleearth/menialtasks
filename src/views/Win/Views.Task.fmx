@@ -1,12 +1,17 @@
 object TaskView: TTaskView
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMaximize]
   Caption = 'Task Details'
   ClientHeight = 422
   ClientWidth = 751
+  Position = OwnerFormCenter
+  StyleBook = StyleBook1
+  Visible = True
   FormFactor.Width = 1680
   FormFactor.Height = 1050
   FormFactor.Devices = [Desktop]
+  OnActivate = FormActivate
   OnClose = FormClose
   OnResize = FormResize
   DesignerMasterStyle = 0
@@ -18,26 +23,19 @@ object TaskView: TTaskView
     Size.Width = 735.000000000000000000
     Size.Height = 378.000000000000000000
     Size.PlatformDefault = False
-    StyleLookup = 'transparentlistboxstyle'
     TabOrder = 6
     DisableFocusEffect = True
     DefaultItemStyles.ItemStyle = ''
     DefaultItemStyles.GroupHeaderStyle = ''
     DefaultItemStyles.GroupFooterStyle = ''
-    Viewport.Width = 735.000000000000000000
-    Viewport.Height = 378.000000000000000000
-    object ListBoxGroupHeader1: TListBoxGroupHeader
-      TabOrder = 3
-      Text = 'Task Details'
-      Visible = False
-    end
+    Viewport.Width = 731.000000000000000000
+    Viewport.Height = 374.000000000000000000
     object lbiTitle: TListBoxItem
       Padding.Left = 100.000000000000000000
       Padding.Top = 8.000000000000000000
       Padding.Right = 8.000000000000000000
       Padding.Bottom = 8.000000000000000000
-      Position.Y = 19.000000000000000000
-      Size.Width = 735.000000000000000000
+      Size.Width = 731.000000000000000000
       Size.Height = 40.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'listboxitemnodetail'
@@ -68,7 +66,7 @@ object TaskView: TTaskView
           'uris felis consequat nisl, sit amet laoreet est quam et tortor. ' +
           'Proin mattis interdum tempus. Etiam ac vehicula neque. Donec tem' +
           'por, velit sit'
-        Size.Width = 627.000000000000000000
+        Size.Width = 623.000000000000000000
         Size.Height = 24.000000000000000000
         Size.PlatformDefault = False
       end
@@ -78,17 +76,17 @@ object TaskView: TTaskView
       Padding.Top = 8.000000000000000000
       Padding.Right = 8.000000000000000000
       Padding.Bottom = 8.000000000000000000
-      Position.Y = 59.000000000000000000
-      Size.Width = 735.000000000000000000
+      Position.Y = 40.000000000000000000
+      Size.Width = 731.000000000000000000
       Size.Height = 40.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'listboxitemnodetail'
       TabOrder = 1
       Text = 'Due'
       object DateEdit1: TDateEdit
-        Date = 42309.000000000000000000
+        Date = 42674.000000000000000000
         Align = Client
-        Size.Width = 627.000000000000000000
+        Size.Width = 623.000000000000000000
         Size.Height = 24.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
@@ -99,8 +97,8 @@ object TaskView: TTaskView
       Padding.Top = 8.000000000000000000
       Padding.Right = 8.000000000000000000
       Padding.Bottom = 8.000000000000000000
-      Position.Y = 99.000000000000000000
-      Size.Width = 735.000000000000000000
+      Position.Y = 80.000000000000000000
+      Size.Width = 731.000000000000000000
       Size.Height = 243.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'listboxitemnodetail'
@@ -113,19 +111,13 @@ object TaskView: TTaskView
           'Lorem ipsum dolor sit amet')
         TextSettings.WordWrap = True
         Align = Client
-        Size.Width = 627.000000000000000000
+        Size.Width = 623.000000000000000000
         Size.Height = 227.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 2
-        Viewport.Width = 623.000000000000000000
+        Viewport.Width = 619.000000000000000000
         Viewport.Height = 223.000000000000000000
       end
-    end
-    object ListBoxGroupFooter1: TListBoxGroupFooter
-      Position.Y = 342.000000000000000000
-      StyleLookup = 'listboxplainheader'
-      TabOrder = 4
-      Visible = False
     end
   end
   object ToolBar1: TToolBar
@@ -237,5 +229,13 @@ object TaskView: TTaskView
       Control = DateEdit1
       Track = True
     end
+  end
+  object StyleBook1: TStyleBook
+    Styles = <
+      item
+      end
+      item
+        Platform = 'Windows 10 Desktop'
+      end>
   end
 end

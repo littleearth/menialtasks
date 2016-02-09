@@ -4,11 +4,13 @@ interface
 
 uses
   System.SysUtils, System.Types, System.UITypes, System.Rtti, System.Classes,
-  System.Variants, FMX.Types, FMX.Controls, FMX.Forms, FMX.Dialogs, ViewModel.Main,
+  System.Variants, FMX.Types, FMX.Controls, FMX.Forms, FMX.Dialogs,
+  ViewModel.Main,
   Data.Bind.ObjectScope, Data.Bind.Components, Data.Bind.EngExt,
-  Fmx.Bind.DBEngExt, Fmx.Bind.Grid, System.Bindings.Outputs, Fmx.Bind.Editors,
+  FMX.Bind.DBEngExt, FMX.Bind.Grid, System.Bindings.Outputs, FMX.Bind.Editors,
   Data.Bind.Grid, FMX.Layouts, FMX.Grid, FMX.ListBox, Data.Bind.GenData,
-  System.Actions, FMX.ActnList, Fmx.Bind.Navigator, Model.Task, EnumerableAdapter,
+  System.Actions, FMX.ActnList, FMX.Bind.Navigator, Model.Task,
+  EnumerableAdapter,
   FMX.Memo, FMX.StdCtrls, FMX.Objects, Data.Bind.Controls, FMX.MultiView,
   FMX.Controls.Presentation;
 
@@ -51,9 +53,9 @@ type
     procedure ListBox1ItemClick(const Sender: TCustomListBox;
       const Item: TListBoxItem);
   private
-    FViewModel : TMainViewModel;
-    function ViewModel : TMainViewModel;
-    function TaskAdapter : TEnumerableBindSourceAdapter<TTask>;
+    FViewModel: TMainViewModel;
+    function ViewModel: TMainViewModel;
+    function TaskAdapter: TEnumerableBindSourceAdapter<TTask>;
     procedure RefreshBindings;
   public
 
@@ -63,14 +65,15 @@ var
   ViewMain: TViewMain;
 
 implementation
+
 uses
   Model.TaskList, Views.Task, ViewModel.Task;
 
 {$R *.fmx}
 {$R *.NmXhdpiPh.fmx ANDROID}
 {$R *.iPhone47in.fmx IOS}
-
 {$REGION 'LiveBindings Related Code'}
+
 procedure TViewMain.RefreshBindings;
 begin
   if TaskAdapter.GetEnumerable = nil then
@@ -81,23 +84,23 @@ end;
 
 function TViewMain.TaskAdapter: TEnumerableBindSourceAdapter<TTask>;
 begin
-  Result := TEnumerableBindSourceAdapter<TTask>(TaskListBindSource.InternalAdapter);
+  Result := TEnumerableBindSourceAdapter<TTask>
+    (TaskListBindSource.InternalAdapter);
 end;
 
 procedure TViewMain.ViewModelBindSourceCreateAdapter(Sender: TObject;
   var ABindSourceAdapter: TBindSourceAdapter);
 begin
-  ABindSourceAdapter := TObjectBindSourceAdapter<TMainViewModel>.Create(ViewModelBindSource,
-                                                                        ViewModel, False);
+  ABindSourceAdapter := TObjectBindSourceAdapter<TMainViewModel>.Create
+    (ViewModelBindSource, ViewModel, False);
 end;
 
 procedure TViewMain.TaskListBindSourceCreateAdapter(Sender: TObject;
   var ABindSourceAdapter: TBindSourceAdapter);
 begin
-  ABindSourceAdapter := TEnumerableBindSourceAdapter<TTask>.Create(TaskListBindSource,
-                                                                   ViewModel.Tasks.GetEnumerable);
+  ABindSourceAdapter := TEnumerableBindSourceAdapter<TTask>.Create
+    (TaskListBindSource, ViewModel.Tasks.GetEnumerable);
 end;
-
 
 {$ENDREGION}
 
@@ -116,11 +119,10 @@ begin
   FViewModel.Free;
 end;
 
-
 procedure TViewMain.ListBox1ItemClick(const Sender: TCustomListBox;
   const Item: TListBoxItem);
 begin
-  if TPresentationState.Opened in MultiView1.Presenter.State then
+  if FMX.MultiView.TPresentationState.Opened in MultiView1.Presenter.State then
     MultiView1.HideMaster;
 end;
 
@@ -129,22 +131,33 @@ begin
   if not Assigned(FViewModel) then
   begin
     FViewModel := TMainViewModel.Create;
-    FViewModel.OnEditTask := procedure (Sender : TObject; TaskViewModel : TTaskViewModel)
-                             var
-                               LTaskView : TTaskView;
-                             begin
-                               LTaskView := TTaskView.Create(nil, TaskViewModel);
-                               LTaskView.ShowModal(procedure(ModalResult : TModalResult)
-                                                   begin
-                                                     TaskViewModel.Free;
-                                                     RefreshBindings;
-                                                   end);
-                             end;
-  end;
+    FViewModel.OnError :=
+        procedure(Sender: TObject; AErrorMessage: string; AErrorCode: Integer)
+      begin
+        MessageDlg(AErrorMessage, TMsgDlgType.mtError, [TMsgDlgBtn.mbOK], 0,
+          procedure(const AResult: TModalResult)
+          begin
+          end);
+      end;
 
+    FViewModel.Load;
+
+    FViewModel.OnEditTask :=
+        procedure(Sender: TObject; TaskViewModel: TTaskViewModel)
+      var
+        LTaskView: TTaskView;
+      begin
+        LTaskView := TTaskView.Create(nil, TaskViewModel);
+        LTaskView.ShowModal(
+          procedure(ModalResult: TModalResult)
+          begin
+            TaskViewModel.Free;
+            RefreshBindings;
+          end);
+      end;
+
+  end;
   Result := FViewModel;
 end;
-
-
 
 end.
